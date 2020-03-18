@@ -34,7 +34,7 @@ public class EnnemieBehavior : MonoBehaviour
     private void Chase()
     {
         transform.LookAt(player.transform);
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     public void ApplyDammage(float dammage)

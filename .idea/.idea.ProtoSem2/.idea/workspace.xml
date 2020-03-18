@@ -14,14 +14,16 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnnemieSpawner.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/EnnemieSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/EnnemieBehavior.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
       </list>
     </option>
   </component>
@@ -83,6 +85,8 @@
       <workItem from="1584358714436" duration="834000" />
       <workItem from="1584359645727" duration="74000" />
       <workItem from="1584359944497" duration="907000" />
+      <workItem from="1584538337971" duration="694000" />
+      <workItem from="1584540079801" duration="452000" />
     </task>
     <servers />
   </component>

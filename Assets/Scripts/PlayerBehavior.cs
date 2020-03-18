@@ -60,7 +60,8 @@ public class PlayerBehavior : MonoBehaviour
         rotation.x = Mathf.Clamp(rotation.x, -66, 66);
         Target.rotation = Quaternion.Euler(rotation.x, rotation.y,0);
         transform.rotation = Quaternion.Euler(0, rotation.y,0);
-        
+
+
     }
 
     private void OnCollisionEnter(Collision other)
