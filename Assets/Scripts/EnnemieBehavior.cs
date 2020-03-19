@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnnemieBehavior : MonoBehaviour
 {
@@ -19,10 +20,15 @@ public class EnnemieBehavior : MonoBehaviour
 
     void Update()
     {
-        Chase();
+        
         if (vie <= 0)
         {
             deathTimer -= 1 * Time.deltaTime;
+            //GetComponent<NavMeshAgent>().enabled = false;
+        }
+        else
+        {
+            Chase();
         }
 
         if (deathTimer <= 0)
@@ -33,12 +39,19 @@ public class EnnemieBehavior : MonoBehaviour
 
     private void Chase()
     {
-        transform.LookAt(player.transform);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (Vector3.Distance(player.transform.position, this.transform.position) > 5f)
+        {
+            transform.LookAt(player.transform);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+        
     }
 
     public void ApplyDammage(float dammage)
     {
         vie -= dammage;
     }
+    
+
+
 }

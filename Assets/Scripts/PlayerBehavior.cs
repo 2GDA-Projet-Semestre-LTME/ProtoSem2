@@ -6,13 +6,12 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float mouseLookSpeed;
     private Vector2 rotation = new Vector2 (0, 0);
     private float smooth = 1.2f;
     public Transform Target;
     [SerializeField] private float jumpForce;
 
-    private bool canJump = false;
+    [SerializeField] private bool canJump = false;
     // Start is called before the first frame update
     void Start()
     {

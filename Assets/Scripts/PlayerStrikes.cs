@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.VFX;
 
 public class PlayerStrikes : MonoBehaviour
@@ -48,9 +49,13 @@ public class PlayerStrikes : MonoBehaviour
         _visualEffect.Play();
         foreach (Collider Co in GetTrigger)
         {
-            Co.gameObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * forceAmount + transform.up * forceAmount * 0.2f);
-            if(Co.transform.GetComponent<EnnemieBehavior>())
-                Co.transform.GetComponent<EnnemieBehavior>().ApplyDammage(10);
+            if (Co != null)
+            {
+                Co.gameObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * forceAmount + transform.up * forceAmount * 0.2f);
+                if(Co.transform.GetComponent<EnnemieBehavior>())
+                    Co.transform.GetComponent<EnnemieBehavior>().ApplyDammage(10);
+            }
+                
         }
         
         StartCoroutine(StopParticles());
@@ -60,8 +65,11 @@ public class PlayerStrikes : MonoBehaviour
     {
         foreach (Collider Co in GetTrigger)
         {
-            if(Vector3.Distance(transform.position, Co.gameObject.transform.position) <= uppercutMaxDistance)
+            if (Co != null && Vector3.Distance(transform.position, Co.gameObject.transform.position) <= uppercutMaxDistance )
+            {
                 Co.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.up * forceAmount * 0.25f);
+            }
+                
         }
         StartCoroutine(StopParticles());
     }
