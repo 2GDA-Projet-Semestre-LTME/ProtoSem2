@@ -13,6 +13,20 @@ public class PlayerStrikes : MonoBehaviour
     [SerializeField] private float uppercutMaxDistance;
 
     [SerializeField] private float forceAmount;
+
+    [SerializeField] private float punchCd;
+
+    [SerializeField] private float upperCd;
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashCd;
+    [SerializeField] private float grabDistance;
+    [SerializeField] private GameObject grabHandler;
+
+    private float uCoolDown;
+    private bool grabbed = false;
+    private float pCoolDown;
+
+    private float dashCoolDown;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,43 +36,54 @@ public class PlayerStrikes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && pCoolDown <= 0)
         {
             Punch();
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1) && uCoolDown <= 0)
         {
             UpperCut();
         }
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && dashCoolDown <= 0 && GetComponent<PlayerBehavior>().GetJump())
+        {
+            Dash();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Grab();
+        }
+
+        decreaseCoolDown();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Punchable")
-            GetTrigger.Add(other);
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "Punchable")
-            GetTrigger.Remove(other);
-    }
+   
 
+    //            |||COUPS DU JOUEUR|||
     private void Punch()
     {
-        _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
-        _visualEffect.Play();
-        foreach (Collider Co in GetTrigger)
+        if (grabbed == false)
         {
-            if (Co != null)
+            _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
+            _visualEffect.Play();
+            foreach (Collider Co in GetTrigger)
             {
-                Co.gameObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * forceAmount + transform.up * forceAmount * 0.2f);
-                if(Co.transform.GetComponent<EnnemieBehavior>())
-                    Co.transform.GetComponent<EnnemieBehavior>().ApplyDammage(10);
-            }
+                if (Co != null)
+                {
+                    Co.gameObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * forceAmount + transform.up * forceAmount * 0.2f);
+                    if(Co.transform.GetComponent<EnnemieBehavior>())
+                        Co.transform.GetComponent<EnnemieBehavior>().ApplyDammage(10);
+                }
                 
+            }
+
+            pCoolDown = punchCd;
+            StartCoroutine(StopParticles());
         }
-        
-        StartCoroutine(StopParticles());
+        else
+        {
+            GetComponent<Animator>().Play("Slash");
+        }
+
     }
 
     private void UpperCut()
@@ -71,13 +96,93 @@ public class PlayerStrikes : MonoBehaviour
             }
                 
         }
+
+        uCoolDown = upperCd;
         StartCoroutine(StopParticles());
     }
+
+    private void Dash()
+    {
+        GetComponent<Rigidbody>().AddForce((new Vector3(0, 0.75f, 0) + transform.forward) * dashForce);
+        dashCoolDown = dashCd;
+    }
+
+    private void Grab()
+    {
+        if (grabbed == false)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance,
+                    LayerMask.GetMask("Grabable")) && grabbed == false)
+            {
+                Debug.Log(hit.transform.name);
+                Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * grabDistance,
+                    Color.blue);
+                hit.transform.SetParent(grabHandler.transform);
+                hit.transform.position = grabHandler.transform.position;
+                hit.transform.GetComponent<Rigidbody>().isKinematic = true;
+                if (hit.transform.GetComponent<EnnemieBehavior>())
+                {
+                    hit.transform.GetComponent<EnnemieBehavior>().enabled = false;
+                    hit.transform.GetComponentInChildren<Animation>().enabled = false;
+                }
+
+                grabbed = true;
+            }
+        }
+        else
+        {
+
+            Transform hit = grabHandler.transform.GetChild(0);
+            print("UnGrab");
+            if (hit.GetComponent<EnnemieBehavior>())
+            {
+                hit.GetComponent<EnnemieBehavior>().enabled = true;
+                hit.GetComponentInChildren<Animation>().enabled = true;
+            }
+            hit.GetComponent<Rigidbody>().isKinematic = false;
+            hit.parent = null;
+            grabbed = false;
+        }
+        
+    }
+    
+    //            |||AUTRES|||
+
+    private void decreaseCoolDown()
+    {
+        if (uCoolDown > 0)
+        {
+            uCoolDown -= 1 * Time.deltaTime;
+        }
+
+        if (pCoolDown > 0)
+        {
+            pCoolDown -= 1 * Time.deltaTime;
+        }
+
+        if (dashCoolDown >= 0)
+        {
+            dashCoolDown -= 1 * Time.deltaTime;
+        }
+    }  //Gère les CDs
 
     IEnumerator StopParticles()
     {
         yield return new WaitForSeconds(0.25f);
         
         _visualEffect.Stop();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Punchable")
+            GetTrigger.Add(other);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Punchable")
+            GetTrigger.Remove(other);
     }
 }

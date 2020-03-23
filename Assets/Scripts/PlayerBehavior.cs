@@ -63,6 +63,11 @@ public class PlayerBehavior : MonoBehaviour
 
     }
 
+    public bool GetJump()
+    {
+        return canJump;
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.CompareTag("Ground"))

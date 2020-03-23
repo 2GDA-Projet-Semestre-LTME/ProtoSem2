@@ -21,9 +21,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/EnnemieSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/EnnemieBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
       </list>
     </option>
   </component>
@@ -89,6 +89,9 @@
       <workItem from="1584540079801" duration="452000" />
       <workItem from="1584576248377" duration="1196000" />
       <workItem from="1584577699515" duration="405000" />
+      <workItem from="1584625658290" duration="1915000" />
+      <workItem from="1584959595570" duration="5744000" />
+      <workItem from="1584986489992" duration="771000" />
     </task>
     <servers />
   </component>
