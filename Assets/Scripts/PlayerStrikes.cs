@@ -38,6 +38,7 @@ public class PlayerStrikes : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && pCoolDown <= 0)
         {
+            print("coup");
             Punch();
         }
         else if (Input.GetMouseButtonDown(1) && uCoolDown <= 0)
@@ -61,6 +62,7 @@ public class PlayerStrikes : MonoBehaviour
     //            |||COUPS DU JOUEUR|||
     private void Punch()
     {
+        print(grabbed);
         if (grabbed == false)
         {
             _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
@@ -81,6 +83,7 @@ public class PlayerStrikes : MonoBehaviour
         }
         else
         {
+            print("Slash");
             GetComponent<Animator>().Play("Slash");
         }
 
