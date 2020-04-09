@@ -21,12 +21,16 @@ public class PlayerStrikes : MonoBehaviour
     [SerializeField] private float dashCd;
     [SerializeField] private float grabDistance;
     [SerializeField] private GameObject grabHandler;
+    [SerializeField] private float smashVelocityMin;
+    [SerializeField] private float stompForce;
 
     private float uCoolDown;
     private bool grabbed = false;
     private float pCoolDown;
 
     private float dashCoolDown;
+
+    private bool willStomp;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,11 @@ public class PlayerStrikes : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Grab();
+        }
+
+        if (Mathf.Abs(GetComponent<Rigidbody>().velocity.y) > smashVelocityMin)
+        {
+            willStomp = true;
         }
 
         decreaseCoolDown();
@@ -95,7 +104,7 @@ public class PlayerStrikes : MonoBehaviour
         {
             if (Co != null && Vector3.Distance(transform.position, Co.gameObject.transform.position) <= uppercutMaxDistance )
             {
-                Co.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.up * forceAmount * 0.25f);
+                Co.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.up * forceAmount * 0.5f);
             }
                 
         }
@@ -150,7 +159,7 @@ public class PlayerStrikes : MonoBehaviour
         }
         
     }
-    
+
     //            |||AUTRES|||
 
     private void decreaseCoolDown()
@@ -187,5 +196,22 @@ public class PlayerStrikes : MonoBehaviour
     {
         if(other.gameObject.tag == "Punchable")
             GetTrigger.Remove(other);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (willStomp && other.transform.CompareTag("Ground"))
+        {
+
+            foreach (var GO in GetComponentInChildren<GetCollider>().obj)
+            {
+                GO.GetComponent<Rigidbody>().AddForce(GO.transform.position.x, (GO.transform.position.y + 1) * stompForce,
+                    GO.transform.position.z);
+
+            }
+
+            
+        }
+        willStomp = false;
     }
 }
