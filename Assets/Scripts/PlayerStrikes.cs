@@ -76,6 +76,7 @@ public class PlayerStrikes : MonoBehaviour
         {
             _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
             _visualEffect.Play();
+            GetComponent<Animator>().Play("CoupDroit");
             foreach (Collider Co in GetTrigger)
             {
                 if (Co != null)
@@ -100,6 +101,7 @@ public class PlayerStrikes : MonoBehaviour
 
     private void UpperCut()
     {
+        GetComponent<Animator>().Play("Uppercut");
         foreach (Collider Co in GetTrigger)
         {
             if (Co != null && Vector3.Distance(transform.position, Co.gameObject.transform.position) <= uppercutMaxDistance )

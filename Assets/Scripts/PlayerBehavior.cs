@@ -46,6 +46,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (canJump && Input.GetKeyDown(KeyCode.Space))
         {
+            GetComponent<Animator>().Play("Jump");
             GetComponent<Rigidbody>().AddForce(transform.up * jumpForce);
             canJump = false;
         }
