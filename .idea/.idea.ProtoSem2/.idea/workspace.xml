@@ -12,12 +12,18 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://F:/AI_API/Assets/Scripts/Teams/BotBehaviourSerera.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://F:/AI_API/Assets/Scripts/BotBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Transition.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Transition.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
       </list>
     </option>
@@ -78,6 +84,11 @@
       <updated>1586651948598</updated>
       <workItem from="1586651967022" duration="801000" />
       <workItem from="1586874275069" duration="1130000" />
+      <workItem from="1586958849484" duration="3474000" />
+      <workItem from="1587214949643" duration="2799000" />
+      <workItem from="1587978701305" duration="1531000" />
+      <workItem from="1587980320897" duration="1193000" />
+      <workItem from="1588519797851" duration="2849000" />
     </task>
     <servers />
   </component>

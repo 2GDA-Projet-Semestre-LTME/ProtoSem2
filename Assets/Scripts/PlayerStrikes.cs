@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -76,7 +75,17 @@ public class PlayerStrikes : MonoBehaviour
         {
             _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
             _visualEffect.Play();
-            GetComponent<Animator>().Play("CoupDroit");
+            int C = Random.Range(0, 3);
+            print(C);
+            if (C < 2)
+            {
+                GetComponent<Animator>().Play("CoupDroit");
+            }
+            else
+            {
+                GetComponent<Animator>().Play("CoupGauche");
+            }
+            
             foreach (Collider Co in GetTrigger)
             {
                 if (Co != null)
@@ -101,23 +110,27 @@ public class PlayerStrikes : MonoBehaviour
 
     private void UpperCut()
     {
-        GetComponent<Animator>().Play("Uppercut");
-        foreach (Collider Co in GetTrigger)
+        if (grabbed == false)
         {
-            if (Co != null && Vector3.Distance(transform.position, Co.gameObject.transform.position) <= uppercutMaxDistance )
+            GetComponent<Animator>().Play("Uppercut");
+            foreach (Collider Co in GetTrigger)
             {
-                Co.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.up * forceAmount * 0.5f);
-            }
-                
-        }
+                if (Co != null && Vector3.Distance(transform.position, Co.gameObject.transform.position) <=
+                    uppercutMaxDistance)
+                {
+                    Co.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.up * forceAmount * 0.5f);
+                }
 
-        uCoolDown = upperCd;
-        StartCoroutine(StopParticles());
+            }
+
+            uCoolDown = upperCd;
+            StartCoroutine(StopParticles());
+        }
     }
 
     private void Dash()
     {
-        GetComponent<Rigidbody>().AddForce((new Vector3(0, 0.75f, 0) + transform.forward) * dashForce);
+        GetComponent<Rigidbody>().AddForce((new Vector3(0, 0.1f, 0) + transform.forward) * dashForce * 1000, ForceMode.Impulse);
         dashCoolDown = dashCd;
     }
 
@@ -135,14 +148,17 @@ public class PlayerStrikes : MonoBehaviour
                     Color.blue);
                 hit.transform.SetParent(grabHandler.transform);
                 hit.transform.position = grabHandler.transform.position;
+                hit.transform.rotation = grabHandler.transform.rotation;
                 hit.transform.GetComponent<Rigidbody>().isKinematic = true;
                 if (hit.transform.GetComponent<EnnemieBehavior>())
                 {
                     hit.transform.GetComponent<EnnemieBehavior>().enabled = false;
                     hit.transform.GetComponentInChildren<Animation>().enabled = false;
                 }
-
+                hit.transform.GetComponent<NavMeshAgent>().enabled = false;
                 grabbed = true;
+                GetComponent<Animator>().SetBool("IsGrabing", true);
+                GetComponent<Animator>().Play("Grab");
             }
         }
         else
@@ -155,9 +171,11 @@ public class PlayerStrikes : MonoBehaviour
                 hit.GetComponent<EnnemieBehavior>().enabled = true;
                 hit.GetComponentInChildren<Animation>().enabled = true;
             }
+            hit.transform.GetComponent<NavMeshAgent>().enabled = true;
             hit.GetComponent<Rigidbody>().isKinematic = false;
             hit.parent = null;
             grabbed = false;
+            GetComponent<Animator>().SetBool("IsGrabing", false);
         }
         
     }
@@ -202,9 +220,10 @@ public class PlayerStrikes : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (willStomp && other.transform.CompareTag("Ground"))
+        /*if (willStomp && other.transform.CompareTag("Ground"))
         {
-
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             foreach (var GO in GetComponentInChildren<GetCollider>().obj)
             {
                 GO.GetComponent<Rigidbody>().AddForce(GO.transform.position.x, (GO.transform.position.y + 1) * stompForce,
@@ -214,6 +233,6 @@ public class PlayerStrikes : MonoBehaviour
 
             
         }
-        willStomp = false;
+        willStomp = false;*/
     }
 }

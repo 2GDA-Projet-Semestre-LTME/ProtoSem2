@@ -48,7 +48,9 @@
             </e>
           </e>
         </e>
-        <e p="GetCollider.cs" t="Include" />
+        <e p="MaterialsPS1" t="Include">
+          <e p="psx-unlit.shader" t="Include" />
+        </e>
         <e p="Plugins" t="Include">
           <e p="FMOD" t="Include">
             <e p="addons" t="Include">
@@ -151,9 +153,37 @@
         <e p="Scripts" t="Include">
           <e p="EnnemieBehavior.cs" t="Include" />
           <e p="EnnemieSpawner.cs" t="Include" />
+          <e p="GetCollider.cs" t="Include" />
           <e p="PlayerBehavior.cs" t="Include" />
           <e p="PlayerStrikes.cs" t="Include" />
         </e>
+        <e p="Shaders" t="Include">
+          <e p="Billboard" t="Include">
+            <e p="billboard.cs" t="Include" />
+          </e>
+          <e p="imageEffects" t="Include">
+            <e p="cPrecision.cs" t="Include" />
+          </e>
+          <e p="psx-unlit_noambient.shader" t="Include" />
+          <e p="psx-vertexlit.shader" t="Include" />
+          <e p="Reflective" t="Include">
+            <e p="psx-unlit-add.shader" t="Include" />
+            <e p="psx-unlit-mult.shader" t="Include" />
+            <e p="psx-unlit_noambient-add.shader" t="Include" />
+            <e p="psx-unlit_noambient-mult.shader" t="Include" />
+            <e p="psx-vertexlit-add.shader" t="Include" />
+            <e p="psx-vertexlit-mult.shader" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="cPrecision.shader" t="Include" />
+          </e>
+          <e p="Trasparent" t="Include">
+            <e p="psx-trasparent-unlit-noambient.shader" t="Include" />
+            <e p="psx-trasparent-unlit.shader" t="Include" />
+            <e p="psx-trasparent-vertexlit.shader" t="Include" />
+          </e>
+        </e>
+        <e p="Transition.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />

@@ -58,23 +58,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GetCollider.cs" />
      <Compile Include="Assets\Scripts\EnnemieBehavior.cs" />
      <Compile Include="Assets\Scripts\EnnemieSpawner.cs" />
+     <Compile Include="Assets\Scripts\GetCollider.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
      <Compile Include="Assets\Scripts\PlayerStrikes.cs" />
+     <Compile Include="Assets\Shaders\Billboard\billboard.cs" />
+     <Compile Include="Assets\Shaders\imageEffects\cPrecision.cs" />
+     <Compile Include="Assets\Transition.cs" />
+     <None Include="Assets\Shaders\Trasparent\psx-trasparent-unlit.shader" />
+     <None Include="Assets\Shaders\Reflective\psx-unlit-mult.shader" />
+     <None Include="Assets\MaterialsPS1\psx-unlit.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\Return\{53b802cb-9603-403c-badc-7c43ad0500e3}.xml" />
      <None Include="Assets\FMod\FmodProject\Metadata\EffectPresetFolder\{a9d6457a-f550-4664-89b1-31c11cc86574}.xml" />
+     <None Include="Assets\Shaders\Resources\cPrecision.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\Asset\{b936d5e9-6a52-4d3c-8f18-91c885339337}.xml" />
+     <None Include="Assets\Shaders\Reflective\psx-unlit_noambient-add.shader" />
+     <None Include="Assets\Shaders\Trasparent\psx-trasparent-vertexlit.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\EventFolder\{29d78914-197c-40be-920c-004fbf4f8073}.xml" />
      <None Include="Assets\FMod\FmodProject\Metadata\Mixer.xml" />
+     <None Include="Assets\Shaders\psx-vertexlit.shader" />
+     <None Include="Assets\Shaders\Trasparent\psx-trasparent-unlit-noambient.shader" />
+     <None Include="Assets\Shaders\Reflective\psx-vertexlit-mult.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\BankFolder\{3dab5533-87bb-4ac9-b7ee-452294419249}.xml" />
+     <None Include="Assets\Shaders\Reflective\psx-vertexlit-add.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\Workspace.xml" />
      <None Include="Assets\FMod\FmodProject\Metadata\Platform\{6c6b7a88-eebc-40f2-b4cd-32792951f012}.xml" />
+     <None Include="Assets\Shaders\Reflective\psx-unlit-add.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\Master.xml" />
+     <None Include="Assets\Shaders\Reflective\psx-unlit_noambient-mult.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\EncodingSetting\{6ec1adff-63ed-4ecf-882a-41f4ff5bc29a}.xml" />
      <None Include="Assets\FMod\FmodProject\Metadata\Tags.xml" />
      <None Include="Assets\FMod\FmodProject\Metadata\SnapshotGroup\{d3d03e95-ffa5-4b16-90c5-8f1bd0d8425a}.xml" />
+     <None Include="Assets\Shaders\psx-unlit_noambient.shader" />
      <None Include="Assets\FMod\FmodProject\Metadata\Bank\{cfb1e2f4-a3f8-4cb5-93b4-ffd2569f979a}.xml" />
      <None Include="Assets\FMod\FmodProject\Metadata\ParameterPresetFolder\{9236877c-d534-4e2b-b6a0-011986adc7ac}.xml" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
@@ -89,17 +105,8 @@
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.ProBuilder">
- <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
- </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Editor">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ProBuilder.Editor">
- <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
- <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Runtime">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
@@ -127,9 +134,6 @@
  </Reference>
  <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ProBuilder.AddOns.Editor">
- <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>

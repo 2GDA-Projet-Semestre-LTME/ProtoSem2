@@ -5,12 +5,11 @@ ScriptsOnlyBuild:
     Assembly-CSharp-firstpass.dll:
     - FMODUnity.Settings
     Assembly-CSharp.dll:
-    - EnnemieBehavior
     - GetCollider
     - PlayerBehavior
     - PlayerStrikes
+    - Transition
     Sirenix.OdinInspector.Editor.dll:
-    - Sirenix.OdinInspector.Editor.GeneralDrawerConfig
     - Sirenix.OdinInspector.Editor.ImportSettingsConfig
     - Sirenix.OdinInspector.Editor.InspectorConfig
     - Sirenix.Serialization.AOTGenerationConfig
@@ -40,26 +39,18 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.UI.DebugUIHandlerVector3
     - UnityEngine.Rendering.UI.DebugUIHandlerVector4
     - UnityEngine.Rendering.UI.UIFoldout
-    - UnityEngine.Rendering.Volume
-    - UnityEngine.Rendering.VolumeProfile
     Unity.RenderPipelines.Universal.Runtime.dll:
-    - UnityEngine.Rendering.Universal.Bloom
-    - UnityEngine.Rendering.Universal.ChromaticAberration
-    - UnityEngine.Rendering.Universal.ColorAdjustments
-    - UnityEngine.Rendering.Universal.ForwardRendererData
-    - UnityEngine.Rendering.Universal.LensDistortion
-    - UnityEngine.Rendering.Universal.PostProcessData
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
-    - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
-    - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.RiderScriptEditorData
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -80,7 +71,46 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Scenes/Game.unity:
+    Assets/Scenes/TransitionArrive.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 381396}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    Assets/Scenes/TransitionTest.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -111,8 +141,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 89
-      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -121,108 +149,94 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
-    - Class: 111
-      Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11414}
+      Script: {instanceID: 11478}
     - Class: 114
-      Script: {instanceID: 11470}
+      Script: {instanceID: 11596}
     - Class: 114
-      Script: {instanceID: 11532}
+      Script: {instanceID: 11706}
     - Class: 114
-      Script: {instanceID: 11602}
+      Script: {instanceID: 11730}
     - Class: 114
-      Script: {instanceID: 11642}
+      Script: {instanceID: 11828}
     - Class: 114
-      Script: {instanceID: 11666}
+      Script: {instanceID: 11832}
     - Class: 114
-      Script: {instanceID: 11702}
+      Script: {instanceID: 11908}
     - Class: 114
-      Script: {instanceID: 11762}
+      Script: {instanceID: 11950}
     - Class: 114
-      Script: {instanceID: 11766}
+      Script: {instanceID: 12084}
     - Class: 114
-      Script: {instanceID: 11842}
+      Script: {instanceID: 12116}
     - Class: 114
-      Script: {instanceID: 11884}
+      Script: {instanceID: 12432}
     - Class: 114
-      Script: {instanceID: 12018}
+      Script: {instanceID: 12480}
     - Class: 114
-      Script: {instanceID: 12050}
+      Script: {instanceID: 12494}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12542}
     - Class: 114
-      Script: {instanceID: 12220}
+      Script: {instanceID: 12772}
     - Class: 114
-      Script: {instanceID: 12366}
+      Script: {instanceID: 12952}
     - Class: 114
-      Script: {instanceID: 12414}
+      Script: {instanceID: 12986}
     - Class: 114
-      Script: {instanceID: 12428}
+      Script: {instanceID: 13026}
     - Class: 114
-      Script: {instanceID: 12476}
+      Script: {instanceID: 13088}
     - Class: 114
-      Script: {instanceID: 12706}
+      Script: {instanceID: 13182}
     - Class: 114
-      Script: {instanceID: 12886}
+      Script: {instanceID: 13456}
     - Class: 114
-      Script: {instanceID: 12920}
+      Script: {instanceID: 13488}
     - Class: 114
-      Script: {instanceID: 12960}
+      Script: {instanceID: 13562}
     - Class: 114
-      Script: {instanceID: 13022}
+      Script: {instanceID: 13628}
     - Class: 114
-      Script: {instanceID: 13114}
+      Script: {instanceID: 13746}
     - Class: 114
-      Script: {instanceID: 13360}
+      Script: {instanceID: 13784}
     - Class: 114
-      Script: {instanceID: 13388}
+      Script: {instanceID: 13914}
     - Class: 114
-      Script: {instanceID: 13420}
+      Script: {instanceID: 13934}
     - Class: 114
-      Script: {instanceID: 13494}
+      Script: {instanceID: 14062}
     - Class: 114
-      Script: {instanceID: 13560}
+      Script: {instanceID: 14092}
     - Class: 114
-      Script: {instanceID: 13678}
+      Script: {instanceID: 14100}
     - Class: 114
-      Script: {instanceID: 13716}
+      Script: {instanceID: 14402}
     - Class: 114
-      Script: {instanceID: 13846}
+      Script: {instanceID: 14418}
     - Class: 114
-      Script: {instanceID: 13866}
+      Script: {instanceID: 14472}
     - Class: 114
-      Script: {instanceID: 13994}
+      Script: {instanceID: 14704}
     - Class: 114
-      Script: {instanceID: 14024}
+      Script: {instanceID: 14888}
     - Class: 114
-      Script: {instanceID: 14032}
+      Script: {instanceID: 14936}
     - Class: 114
-      Script: {instanceID: 14256}
+      Script: {instanceID: 15134}
     - Class: 114
-      Script: {instanceID: 14334}
+      Script: {instanceID: 15136}
     - Class: 114
-      Script: {instanceID: 14350}
+      Script: {instanceID: 15186}
     - Class: 114
-      Script: {instanceID: 14404}
+      Script: {instanceID: 15188}
     - Class: 114
-      Script: {instanceID: 14636}
+      Script: {instanceID: 15310}
     - Class: 114
-      Script: {instanceID: 14820}
+      Script: {instanceID: 15316}
     - Class: 114
-      Script: {instanceID: 14868}
-    - Class: 114
-      Script: {instanceID: 15066}
-    - Class: 114
-      Script: {instanceID: 15068}
-    - Class: 114
-      Script: {instanceID: 15118}
-    - Class: 114
-      Script: {instanceID: 15120}
-    - Class: 114
-      Script: {instanceID: 15242}
-    - Class: 114
-      Script: {instanceID: 15248}
+      Script: {instanceID: 381396}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -244,10 +258,6 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    - Class: 238
-      Script: {instanceID: 0}
-    - Class: 258
       Script: {instanceID: 0}
     - Class: 328
       Script: {instanceID: 0}
@@ -298,7 +308,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerBitField
   - hash:
       serializedVersion: 2
-      Hash: e4d9c862d3cd4583a2a26e720d9e53f4
+      Hash: f1a11aa8551fb79963dcd155c0382647
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnnemieBehavior
@@ -332,6 +342,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
     namespaceName: UnityEngine.Rendering.Universal
     className: Bloom
+  - hash:
+      serializedVersion: 2
+      Hash: 3304b8064da7d39ae503de7868cbe7a6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: cPrecision
   - hash:
       serializedVersion: 2
       Hash: a5781dc71a671b1ad2b38de19f24b71f
@@ -656,6 +672,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 40a565a16a0c388d5be8eb750d22f77f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: billboard
   - hash:
       serializedVersion: 2
       Hash: 5e1eefcd5106de6c2e85908a3b2d3f04
@@ -1352,7 +1374,14 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 83b2bf7b5796cc71c44757b7c90123e4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Transition
   platform: 19
   scenePathNames:
-  - Assets/Scenes/Game.unity
-  playerPath: "C:/Users/Th\xE9o/Desktop/UVs/UltraViolence.exe"
+  - Assets/Scenes/TransitionTest.unity
+  - Assets/Scenes/TransitionArrive.unity
+  playerPath: "C:/Users/Th\xE9o/Desktop/Transition/UltraViolence.exe"
