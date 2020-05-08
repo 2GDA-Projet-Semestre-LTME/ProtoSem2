@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -11,15 +13,25 @@ public class PlayerBehavior : MonoBehaviour
     private float smooth = 1.2f;
     public Transform Target;
     [SerializeField] private float jumpForce;
+    [SerializeField] private int vie;
+    private int vieMax;
+    [SerializeField] private Slider lifeBar;
 
     [SerializeField] private bool canJump = false;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(this);
+        vieMax = vie;
     }
+
+    private void Update()
+    {
+        lifeBar.value = (float)vie / vieMax;
+    }
+
     void LateUpdate()
     {
         
@@ -82,6 +94,17 @@ public class PlayerBehavior : MonoBehaviour
         {
             canJump = true;
         }
+        if(other.transform.CompareTag("LifeBox"))
+        {
+            vie += other.transform.GetComponent<LifeItem>().lifeToAdd;
+            Destroy(other.gameObject);
+        }
+    }
+
+    public void ApplyDammage(int dmg)
+    {
+        vie -= dmg;
+        print("Application des dommages " + dmg);
     }
 
     // Update is called once per frame

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 public class EnnemieBehavior : MonoBehaviour
 {
@@ -12,13 +14,20 @@ public class EnnemieBehavior : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private float deathTimer;
-    [SerializeField] private float fightingDistance;
+    [SerializeField] private float waitingDistance;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private int dammage;
+    [SerializeField] private float attackInterval;
+    [SerializeField] private float grabHitForce;
+    [SerializeField] private int grabHitSelfDammage;
+    public Transform ringPosition;
 
     public enum BotState
     {
         Chase,
-        Fight
+        Fight,
+        Guard,
+        Wait
     }
 
     [SerializeField] private BotState state;
@@ -28,6 +37,8 @@ public class EnnemieBehavior : MonoBehaviour
         player = GameObject.Find("Player");
         GetComponent<NavMeshAgent>().speed = speed;
         agent = GetComponent<NavMeshAgent>();
+        InvokeRepeating("Punch", 0, attackInterval);
+        SwitchState(BotState.Chase);
     }
 
     private void OnStateChanged()
@@ -35,8 +46,18 @@ public class EnnemieBehavior : MonoBehaviour
         switch (state)
         {
             case BotState.Chase:
+                
+                if (ringPosition == null && player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0)
+                {
+                    int I = UnityEngine.Random.Range(0, player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count);
+                    ringPosition = player.GetComponent<Ennemies_Positionnement>().avalaiblePosition[I];
+                    player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Remove(ringPosition);
+                    player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Add(ringPosition);
+                    
+                }
                 break;
-            case BotState.Fight:
+            case BotState.Wait:
+                GetComponent<NavMeshAgent>().SetDestination(transform.position);
                 break;
         }
     }
@@ -46,12 +67,39 @@ public class EnnemieBehavior : MonoBehaviour
         switch (state)
         {
             case BotState.Chase:
-                GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
-                GetComponentInChildren<Animator>().Play("Running");
+                if (vie > 0)
+                {
+                    if(ringPosition)
+                        GetComponent<NavMeshAgent>().SetDestination(ringPosition.position);
+                    else if(Vector3.Distance(transform.position, player.transform.position) > waitingDistance)
+                    {
+                        agent.SetDestination(player.transform.position);
+                    }
+                    else
+                    {
+                        agent.SetDestination(transform.position);
+                        SwitchState(BotState.Wait);
+                    }
+                    GetComponentInChildren<Animator>().Play("Running");
+                }
                 break;
+            case BotState.Guard:
+                    transform.LookAt(player.transform);
+                    GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+                    GetComponentInChildren<Animator>().Play("Fighting Idle");
+                    if (player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0)
+                    {
+                        SwitchState(BotState.Chase);
+                    }
+                    break;
             case BotState.Fight:
-                transform.LookAt(player.transform);
-                GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+                GetComponentInChildren<Animator>().Play("Punching");
+                break;
+            case BotState.Wait:
+                if (Vector3.Distance(transform.position, player.transform.position) > waitingDistance)
+                {
+                    SwitchState(BotState.Chase);
+                }
                 GetComponentInChildren<Animator>().Play("Fighting Idle");
                 break;
         }
@@ -64,24 +112,31 @@ public class EnnemieBehavior : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(this.transform.position, player.transform.position) >= fightingDistance)
+        
+        if (ringPosition == null && player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count == 0 &&
+            Vector3.Distance(transform.position, player.transform.position) < waitingDistance)
+        {
+            SwitchState(BotState.Wait);
+        }
+        else if (ringPosition && Vector3.Distance(this.transform.position, ringPosition.position) > 3)
         {
             SwitchState(BotState.Chase);
         }
-        else
+        else if(ringPosition && state == BotState.Chase && Vector3.Distance(this.transform.position, ringPosition.position) <= 3)
         {
-            SwitchState(BotState.Fight);
+            SwitchState(BotState.Guard);
         }
         if(!agent.pathPending)
             UpdateState();
             
         if (vie <= 0) {
-            deathTimer -= 1 * Time.deltaTime;
-            agent.enabled = false;
+            Death();
         }
 
         if (deathTimer <= 0)
         {
+            player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Add(ringPosition);
+            player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Remove(ringPosition);
             Destroy(gameObject);
         }
         
@@ -90,8 +145,50 @@ public class EnnemieBehavior : MonoBehaviour
     public void ApplyDammage(float dammage)
     {
         vie -= dammage;
+        GetComponentInChildren<ParticleSystem>().Play();
     }
-    
 
+    public void Punch()
+    {
+        if (state == BotState.Guard)
+        {
+            SwitchState(BotState.Fight);
+            player.GetComponent<PlayerBehavior>().ApplyDammage(dammage);
+           StartCoroutine(GoToGuard());
+           
+        }
+            
+    }
 
+    private void Death()
+    {
+        deathTimer -= 1 * Time.deltaTime;
+        agent.enabled = false;
+        GetComponent<Rigidbody>().isKinematic = false;
+        
+    }
+
+    IEnumerator GoToGuard()
+    {
+        yield return new WaitForSeconds(1);
+        SwitchState(BotState.Guard);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.GetComponent<EnnemieBehavior>() && GetComponent<Collider>().isTrigger && player.GetComponent<PlayerStrikes>().isSlashing)
+        {
+            other.transform.GetComponent<Rigidbody>().isKinematic = false;
+            other.transform.GetComponent<EnnemieBehavior>().ApplyDammage(100);
+            other.GetComponent<Rigidbody>().AddForce(other.transform.right * grabHitForce);
+            if (vie - grabHitSelfDammage <= 0)
+            {
+                player.GetComponent<PlayerStrikes>().LostGrab();
+                Destroy(gameObject);
+            }
+            vie -= grabHitSelfDammage;
+            
+            
+        }
+    }
 }

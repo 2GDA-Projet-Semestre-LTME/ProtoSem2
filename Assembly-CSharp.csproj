@@ -58,14 +58,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Ennemies_Positionnement.cs" />
      <Compile Include="Assets\Scripts\EnnemieBehavior.cs" />
      <Compile Include="Assets\Scripts\EnnemieSpawner.cs" />
      <Compile Include="Assets\Scripts\GetCollider.cs" />
+     <Compile Include="Assets\Scripts\LifeItem.cs" />
      <Compile Include="Assets\Scripts\PlayerBehavior.cs" />
      <Compile Include="Assets\Scripts\PlayerStrikes.cs" />
+     <Compile Include="Assets\Scripts\Transition.cs" />
      <Compile Include="Assets\Shaders\Billboard\billboard.cs" />
      <Compile Include="Assets\Shaders\imageEffects\cPrecision.cs" />
-     <Compile Include="Assets\Transition.cs" />
      <None Include="Assets\Shaders\Trasparent\psx-trasparent-unlit.shader" />
      <None Include="Assets\Shaders\Reflective\psx-unlit-mult.shader" />
      <None Include="Assets\MaterialsPS1\psx-unlit.shader" />
@@ -111,6 +113,9 @@
  <Reference Include="Unity.RenderPipelines.Core.Runtime">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.VisualEffectGraph.Runtime">
+ <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.VisualEffectGraph.Runtime.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -135,6 +140,9 @@
  <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.VisualEffectGraph.Editor">
+ <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
  </Reference>
@@ -146,6 +154,18 @@
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder">
+ <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder.Editor">
+ <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+ <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ProBuilder.AddOns.Editor">
+ <HintPath>C:/Users/Théo/Desktop/Prototypes/UltraViolence/ProtoSem2/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>F:/Program Files (x86)/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

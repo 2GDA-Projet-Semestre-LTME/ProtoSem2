@@ -22,6 +22,8 @@ public class PlayerStrikes : MonoBehaviour
     [SerializeField] private GameObject grabHandler;
     [SerializeField] private float smashVelocityMin;
     [SerializeField] private float stompForce;
+    [SerializeField] private bool isDashing;
+    public bool isSlashing = false;
 
     private float uCoolDown;
     private bool grabbed = false;
@@ -51,6 +53,7 @@ public class PlayerStrikes : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftShift) && dashCoolDown <= 0 && GetComponent<PlayerBehavior>().GetJump())
         {
             Dash();
+            isDashing = true;
         }
         else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -62,6 +65,15 @@ public class PlayerStrikes : MonoBehaviour
             willStomp = true;
         }
 
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Slash"))
+        {
+            isSlashing = true;
+            print("je slash");
+        }
+        else
+        {
+            isSlashing = false;
+        }
         decreaseCoolDown();
     }
 
@@ -70,14 +82,12 @@ public class PlayerStrikes : MonoBehaviour
     //            |||COUPS DU JOUEUR|||
     private void Punch()
     {
-        print(grabbed);
         if (grabbed == false)
         {
             _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
             _visualEffect.Play();
-            int C = Random.Range(0, 3);
-            print(C);
-            if (C < 2)
+            int C = Random.Range(0, 2);
+            if (C == 0)
             {
                 GetComponent<Animator>().Play("CoupDroit");
             }
@@ -93,6 +103,13 @@ public class PlayerStrikes : MonoBehaviour
                     Co.gameObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * forceAmount + transform.up * forceAmount * 0.2f);
                     if(Co.transform.GetComponent<EnnemieBehavior>())
                         Co.transform.GetComponent<EnnemieBehavior>().ApplyDammage(10);
+                    else if (Co.transform.CompareTag("LifeDistrib"))
+                    {
+                        Instantiate(GameObject.Find("LifeBox"),
+                            new Vector3(Co.transform.position.x + 5f, transform.position.y, transform.position.z),
+                            transform.rotation);
+                        Destroy(Co.gameObject);
+                    }
                 }
                 
             }
@@ -102,10 +119,8 @@ public class PlayerStrikes : MonoBehaviour
         }
         else
         {
-            print("Slash");
             GetComponent<Animator>().Play("Slash");
         }
-
     }
 
     private void UpperCut()
@@ -130,6 +145,7 @@ public class PlayerStrikes : MonoBehaviour
 
     private void Dash()
     {
+        GetComponent<Animator>().Play("Jump");
         GetComponent<Rigidbody>().AddForce((new Vector3(0, 0.1f, 0) + transform.forward) * dashForce * 1000, ForceMode.Impulse);
         dashCoolDown = dashCd;
     }
@@ -143,19 +159,18 @@ public class PlayerStrikes : MonoBehaviour
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance,
                     LayerMask.GetMask("Grabable")) && grabbed == false)
             {
-                Debug.Log(hit.transform.name);
                 Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * grabDistance,
                     Color.blue);
                 hit.transform.SetParent(grabHandler.transform);
                 hit.transform.position = grabHandler.transform.position;
                 hit.transform.rotation = grabHandler.transform.rotation;
-                hit.transform.GetComponent<Rigidbody>().isKinematic = true;
                 if (hit.transform.GetComponent<EnnemieBehavior>())
                 {
                     hit.transform.GetComponent<EnnemieBehavior>().enabled = false;
-                    hit.transform.GetComponentInChildren<Animation>().enabled = false;
+                    hit.transform.GetComponentInChildren<Animator>().enabled = false;
                 }
                 hit.transform.GetComponent<NavMeshAgent>().enabled = false;
+                hit.transform.GetComponent<Collider>().isTrigger = true;
                 grabbed = true;
                 GetComponent<Animator>().SetBool("IsGrabing", true);
                 GetComponent<Animator>().Play("Grab");
@@ -165,15 +180,14 @@ public class PlayerStrikes : MonoBehaviour
         {
 
             Transform hit = grabHandler.transform.GetChild(0);
-            print("UnGrab");
             if (hit.GetComponent<EnnemieBehavior>())
             {
                 hit.GetComponent<EnnemieBehavior>().enabled = true;
-                hit.GetComponentInChildren<Animation>().enabled = true;
+                hit.GetComponentInChildren<Animator>().enabled = true;
             }
             hit.transform.GetComponent<NavMeshAgent>().enabled = true;
-            hit.GetComponent<Rigidbody>().isKinematic = false;
             hit.parent = null;
+            hit.transform.GetComponent<Collider>().isTrigger = false;
             grabbed = false;
             GetComponent<Animator>().SetBool("IsGrabing", false);
         }
@@ -209,30 +223,37 @@ public class PlayerStrikes : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Punchable")
+        if(other.gameObject.tag == "Punchable" || other.gameObject.tag == "LifeDistrib")
             GetTrigger.Add(other);
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Punchable")
+        if(other.gameObject.tag == "Punchable" || other.gameObject.tag == "LifeDistrib")
             GetTrigger.Remove(other);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        /*if (willStomp && other.transform.CompareTag("Ground"))
+        if (isDashing && other.transform.CompareTag("Ground"))
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            GameObject.Find("StompParticles").GetComponent<ParticleSystem>().Play();
             foreach (var GO in GetComponentInChildren<GetCollider>().obj)
             {
                 GO.GetComponent<Rigidbody>().AddForce(GO.transform.position.x, (GO.transform.position.y + 1) * stompForce,
                     GO.transform.position.z);
-
+        
             }
-
-            
+            isDashing = false;
         }
-        willStomp = false;*/
+
+        
+    }
+
+    public void LostGrab()
+    {
+        grabbed = false;
+        GetComponent<Animator>().SetBool("IsGrabing", false);
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Punchable
   - Ground
+  - LifeBox
+  - AlwaysSHow
+  - LifeDistrib
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - 
   - Post-Processing
   - Grabable
-  - 
+  - AlwaysShow
   - 
   - 
   - 

@@ -12,19 +12,21 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Ennemies_Positionnement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://F:/AI_API/Assets/Scripts/Teams/BotBehaviourSerera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://F:/AI_API/Assets/Scripts/BotBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Transition.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Transition.cs" />
+        <option value="$PROJECT_DIR$/Assets/LifeItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
+        <option value="$PROJECT_DIR$/Assets/Ennemies_Positionnement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
       </list>
     </option>
   </component>
@@ -89,6 +91,14 @@
       <workItem from="1587978701305" duration="1531000" />
       <workItem from="1587980320897" duration="1193000" />
       <workItem from="1588519797851" duration="2849000" />
+      <workItem from="1588597292598" duration="2136000" />
+      <workItem from="1588629092914" duration="2281000" />
+      <workItem from="1588669836732" duration="1796000" />
+      <workItem from="1588711962118" duration="3340000" />
+      <workItem from="1588772669768" duration="5586000" />
+      <workItem from="1588856999658" duration="1477000" />
+      <workItem from="1588862400799" duration="3310000" />
+      <workItem from="1588896127611" duration="438000" />
     </task>
     <servers />
   </component>
