@@ -12,10 +12,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/GrenadeBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Ennemies_Positionnement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://F:/AI_API/Assets/Scripts/Teams/BotBehaviourSerera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://F:/AI_API/Assets/Scripts/BotBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/grenadierBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ExplosionBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -23,10 +26,14 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Transition.cs" />
         <option value="$PROJECT_DIR$/Assets/LifeItem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
         <option value="$PROJECT_DIR$/Assets/Ennemies_Positionnement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/grenadierBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/grenadierBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/GrenadeBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/ExplosionBehavior.cs" />
       </list>
     </option>
   </component>
@@ -99,6 +106,19 @@
       <workItem from="1588856999658" duration="1477000" />
       <workItem from="1588862400799" duration="3310000" />
       <workItem from="1588896127611" duration="438000" />
+      <workItem from="1588931046689" duration="85000" />
+      <workItem from="1588931160518" duration="10000" />
+      <workItem from="1588931218603" duration="256000" />
+      <workItem from="1589198634362" duration="8680000" />
+      <workItem from="1589225150658" duration="952000" />
+      <workItem from="1589234152622" duration="4453000" />
+      <workItem from="1589275618189" duration="823000" />
+      <workItem from="1589278637804" duration="974000" />
+      <workItem from="1589283335424" duration="590000" />
+      <workItem from="1589284033543" duration="9418000" />
+      <workItem from="1589300188730" duration="716000" />
+      <workItem from="1589300938060" duration="1196000" />
+      <workItem from="1589390844976" duration="198000" />
     </task>
     <servers />
   </component>

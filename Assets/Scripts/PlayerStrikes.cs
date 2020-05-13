@@ -32,6 +32,7 @@ public class PlayerStrikes : MonoBehaviour
     private float dashCoolDown;
 
     private bool willStomp;
+    private bool flip = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,21 +44,22 @@ public class PlayerStrikes : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && pCoolDown <= 0)
         {
-            print("coup");
             Punch();
         }
-        else if (Input.GetMouseButtonDown(1) && uCoolDown <= 0)
+        /*else if (Input.GetMouseButtonDown(1) && uCoolDown <= 0)
         {
             UpperCut();
-        }
+        }*/
         else if (Input.GetKeyDown(KeyCode.LeftShift) && dashCoolDown <= 0 && GetComponent<PlayerBehavior>().GetJump())
         {
             Dash();
             isDashing = true;
+            //FMODUnity.RuntimeManager.PlayOneShot("Nom De L'Event", transform.position);
         }
         else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Grab();
+            //FMODUnity.RuntimeManager.PlayOneShot("Nom De L'Event", transform.position);
         }
 
         if (Mathf.Abs(GetComponent<Rigidbody>().velocity.y) > smashVelocityMin)
@@ -84,16 +86,15 @@ public class PlayerStrikes : MonoBehaviour
     {
         if (grabbed == false)
         {
-            _visualEffect.SetVector3("CameraRotation", Camera.main.transform.eulerAngles);
-            _visualEffect.Play();
-            int C = Random.Range(0, 2);
-            if (C == 0)
+            if (flip)
             {
                 GetComponent<Animator>().Play("CoupDroit");
+                flip = false;
             }
             else
             {
                 GetComponent<Animator>().Play("CoupGauche");
+                flip = true;
             }
             
             foreach (Collider Co in GetTrigger)
@@ -236,15 +237,16 @@ public class PlayerStrikes : MonoBehaviour
     {
         if (isDashing && other.transform.CompareTag("Ground"))
         {
+            //FMODUnity.RuntimeManager.PlayOneShot("Nom De L'Event", transform.position);
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             GameObject.Find("StompParticles").GetComponent<ParticleSystem>().Play();
-            foreach (var GO in GetComponentInChildren<GetCollider>().obj)
+           /*foreach (var GO in GetComponentInChildren<GetCollider>().obj)
             {
                 GO.GetComponent<Rigidbody>().AddForce(GO.transform.position.x, (GO.transform.position.y + 1) * stompForce,
                     GO.transform.position.z);
         
-            }
+            }*/
             isDashing = false;
         }
 
@@ -255,5 +257,21 @@ public class PlayerStrikes : MonoBehaviour
     {
         grabbed = false;
         GetComponent<Animator>().SetBool("IsGrabing", false);
+    }
+
+    private void PlayPunchSounds(string Target)
+    {
+        switch (Target)
+        {
+            case "Jaguar":
+                //FMODUnity.RuntimeManager.PlayOneShot("Nom De L'Event", transform.position);
+                break;
+            case "Grenadier":
+                //FMODUnity.RuntimeManager.PlayOneShot("Nom De L'Event", transform.position);
+                break;
+            case "Distrib":
+                //FMODUnity.RuntimeManager.PlayOneShot("Nom De L'Event", transform.position);
+                break;
+        }
     }
 }

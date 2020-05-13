@@ -17,19 +17,24 @@ public class PlayerBehavior : MonoBehaviour
     private int vieMax;
     [SerializeField] private Slider lifeBar;
 
-    [SerializeField] private bool canJump = false;
+    [SerializeField] private bool canJump = true;
     // Start is called before the first frame update
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         vieMax = vie;
     }
 
     private void Update()
     {
-        lifeBar.value = (float)vie / vieMax;
+        //lifeBar.value = (float)vie / vieMax;
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void LateUpdate()
@@ -104,7 +109,6 @@ public class PlayerBehavior : MonoBehaviour
     public void ApplyDammage(int dmg)
     {
         vie -= dmg;
-        print("Application des dommages " + dmg);
     }
 
     // Update is called once per frame

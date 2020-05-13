@@ -57,7 +57,8 @@ public class EnnemieBehavior : MonoBehaviour
                 }
                 break;
             case BotState.Wait:
-                GetComponent<NavMeshAgent>().SetDestination(transform.position);
+                if(agent.enabled)
+                    GetComponent<NavMeshAgent>().SetDestination(transform.position);
                 break;
         }
     }
@@ -69,7 +70,7 @@ public class EnnemieBehavior : MonoBehaviour
             case BotState.Chase:
                 if (vie > 0)
                 {
-                    if(ringPosition)
+                    if(ringPosition && agent.enabled)
                         GetComponent<NavMeshAgent>().SetDestination(ringPosition.position);
                     else if(Vector3.Distance(transform.position, player.transform.position) > waitingDistance)
                     {
@@ -85,7 +86,8 @@ public class EnnemieBehavior : MonoBehaviour
                 break;
             case BotState.Guard:
                     transform.LookAt(player.transform);
-                    GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+                    if(agent.enabled)
+                        GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
                     GetComponentInChildren<Animator>().Play("Fighting Idle");
                     if (player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0)
                     {
@@ -101,6 +103,7 @@ public class EnnemieBehavior : MonoBehaviour
                     SwitchState(BotState.Chase);
                 }
                 GetComponentInChildren<Animator>().Play("Fighting Idle");
+                transform.LookAt(player.transform);
                 break;
         }
     }
