@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class grenadierBehavior : MonoBehaviour
+public class GrenadierBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject player;
 
     [SerializeField] private float range;
 
     private NavMeshAgent agent;
-    [SerializeField] private float vie;
+    public float vie;
     [SerializeField] private float deathTimer;
-    [SerializeField] private float projTimeToReachPlayer;
-    [SerializeField] private GameObject Proj;
     private Vector3 fireDirection;
     public GameObject launcher;
+    [SerializeField] private GameObject Proj;
     [SerializeField] private float angleOfLaunch;
-
     public float speed;
+    [SerializeField] private float engagingDistance;
 
     public enum State
     {
@@ -114,6 +112,8 @@ public class grenadierBehavior : MonoBehaviour
     {
         vie -= dammage;
         GetComponentInChildren<ParticleSystem>().Play();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/NCP/Degat Ennemi/Crachat de sang + brisage d'os (ok)", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Coup de poing/Coup de poing AVEC contact (ok)", transform.position);  
     }
     private void Death()
     {
@@ -139,7 +139,6 @@ public class grenadierBehavior : MonoBehaviour
         }
         Debug.DrawRay(transform.position, fireDirection, Color.red);
     }
-
     Vector3 calcBallisticVelocityVector(Vector3 source, Vector3 target, float angle){
         Vector3 direction = target - source;                            
         float h = direction.y;                                           
@@ -153,4 +152,5 @@ public class grenadierBehavior : MonoBehaviour
         float velocity = Mathf.Sqrt(distance * Physics.gravity.magnitude / Mathf.Sin(2*a));
         return velocity * direction.normalized;    
     }
+    
 }

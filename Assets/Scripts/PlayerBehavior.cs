@@ -9,18 +9,21 @@ using UnityEngine.UI;
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private Vector2 rotation = new Vector2 (0, 0);
+    private Vector2 rotation;
     private float smooth = 1.2f;
     public Transform Target;
     [SerializeField] private float jumpForce;
     [SerializeField] private int vie;
     private int vieMax;
     [SerializeField] private Slider lifeBar;
+    [SerializeField] private float stepInterval;
+    private float actualStepInterval = 0;
 
     [SerializeField] private bool canJump = true;
     // Start is called before the first frame update
     private void Start()
     {
+        rotation = new Vector2(transform.eulerAngles.x,transform.eulerAngles.y);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         //DontDestroyOnLoad(this);
@@ -29,7 +32,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Update()
     {
-        //lifeBar.value = (float)vie / vieMax;
+        vie = Mathf.Clamp(vie, 0, 100);
+        lifeBar.value = (float)vie / vieMax;
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
@@ -42,7 +46,7 @@ public class PlayerBehavior : MonoBehaviour
         
         PlayerMovement();
         MouseLook();
-        Jumping();
+        //Jumping();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -63,17 +67,11 @@ public class PlayerBehavior : MonoBehaviour
         Vector3 forwardVector = transform.forward * vert;
         Vector3 rightVector = transform.right * horz;
         GetComponent<Rigidbody>().position += Vector3.ClampMagnitude(forwardVector + rightVector, 1f) * speed * Time.deltaTime * smooth;
-
-    }
-
-    private void Jumping()
-    {
-        if (canJump && Input.GetKeyDown(KeyCode.Space))
+        if (horz != 0 || vert != 0)
         {
-            GetComponent<Animator>().Play("Jump");
-            GetComponent<Rigidbody>().AddForce(transform.up * jumpForce);
-            canJump = false;
+            StepSoundInterval();
         }
+
     }
 
     private void MouseLook()
@@ -83,7 +81,7 @@ public class PlayerBehavior : MonoBehaviour
         Camera.main.transform.LookAt(Target);
         rotation.x = Mathf.Clamp(rotation.x, -66, 66);
         Target.rotation = Quaternion.Euler(rotation.x, rotation.y,0);
-        transform.rotation = Quaternion.Euler(0, rotation.y,0);
+        transform.rotation = Quaternion.Euler(transform.rotation.x, rotation.y,transform.rotation.z);
 
 
     }
@@ -111,6 +109,22 @@ public class PlayerBehavior : MonoBehaviour
         vie -= dmg;
     }
 
-    // Update is called once per frame
-    
+    private void StepSoundInterval()
+    {
+        if (actualStepInterval > 0)
+        {
+            actualStepInterval -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            actualStepInterval = stepInterval;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Pas/Bruit de pas (ok)", transform.position);
+        }
+    }
+
+    public void AddLifePoints(int lifeAmmount)
+    {
+        vie += lifeAmmount;
+    }
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{32d984e8-8cf6-4587-9d27-54c02f0fb3f0}">
+		<property name="assetPath">
+			<value>ESE - FIGHT PACK - HIT - Tight 02.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.37372916666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b936d5e9-6a52-4d3c-8f18-91c885339337}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +9,7 @@ using Random = System.Random;
 
 public class EnnemieBehavior : MonoBehaviour
 {
-    [SerializeField] private float vie;
+    [SerializeField] private int vie;
 
     private GameObject player;
 
@@ -19,8 +20,9 @@ public class EnnemieBehavior : MonoBehaviour
     [SerializeField] private int dammage;
     [SerializeField] private float attackInterval;
     [SerializeField] private float grabHitForce;
-    [SerializeField] private int grabHitSelfDammage;
     public Transform ringPosition;
+    [SerializeField] private float engagingDistance;
+    [SerializeField] private int lifePointSustenance;
 
     public enum BotState
     {
@@ -121,11 +123,11 @@ public class EnnemieBehavior : MonoBehaviour
         {
             SwitchState(BotState.Wait);
         }
-        else if (ringPosition && Vector3.Distance(this.transform.position, ringPosition.position) > 3)
+        else if (ringPosition && Vector3.Distance(this.transform.position, ringPosition.position) > engagingDistance)
         {
             SwitchState(BotState.Chase);
         }
-        else if(ringPosition && state == BotState.Chase && Vector3.Distance(this.transform.position, ringPosition.position) <= 3)
+        else if(ringPosition && state == BotState.Chase && Vector3.Distance(this.transform.position, ringPosition.position) <= engagingDistance)
         {
             SwitchState(BotState.Guard);
         }
@@ -140,15 +142,18 @@ public class EnnemieBehavior : MonoBehaviour
         {
             player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Add(ringPosition);
             player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Remove(ringPosition);
+            player.GetComponent<PlayerBehavior>().AddLifePoints(lifePointSustenance);
             Destroy(gameObject);
         }
         
         
     }
-    public void ApplyDammage(float dammage)
+    public void ApplyDammage(int dammage)
     {
         vie -= dammage;
         GetComponentInChildren<ParticleSystem>().Play();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/NCP/Degat Ennemi/Crachat de sang + brisage d'os (ok)", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Coup de poing/Coup de poing AVEC contact (ok)", transform.position);   
     }
 
     public void Punch()
@@ -156,8 +161,54 @@ public class EnnemieBehavior : MonoBehaviour
         if (state == BotState.Guard)
         {
             SwitchState(BotState.Fight);
-            player.GetComponent<PlayerBehavior>().ApplyDammage(dammage);
-           StartCoroutine(GoToGuard());
+            if (player.GetComponent<PlayerStrikes>().isShielded)
+            {
+                if (player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0)
+                    .GetComponent<EnnemieBehavior>())
+                {
+                    player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0).GetComponent<EnnemieBehavior>()
+                        .vie -= dammage;
+                    if (player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0)
+                            .GetComponent<EnnemieBehavior>()
+                            .vie <= 0)
+                    {
+                        Destroy( player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0).gameObject);
+                    }
+                }
+                    
+                else if (player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0)
+                    .GetComponent<EagleBehavior>())
+                {
+                    player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0).GetComponent<EagleBehavior>()
+                        .vie -= dammage;
+                    if (player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0)
+                            .GetComponent<EagleBehavior>()
+                            .vie <= 0)
+                    {
+                        Destroy( player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0).gameObject);
+                    }
+                }
+                /*else if (player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0)
+                    .GetComponent<grenadierBehavior>())
+                {
+                    player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0).GetComponent<grenadierBehavior>()
+                        .vie -= dammage;
+                    if (player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0)
+                            .GetComponent<grenadierBehavior>()
+                            .vie <= 0)
+                    {
+                        Destroy( player.GetComponent<PlayerStrikes>().grabHandler.transform.GetChild(0).gameObject);
+                    }
+                    
+                }*/
+            }
+            else
+            {
+                player.GetComponent<PlayerBehavior>().ApplyDammage(dammage);
+            }
+                
+                
+            StartCoroutine(GoToGuard());
            
         }
             
@@ -177,21 +228,23 @@ public class EnnemieBehavior : MonoBehaviour
         SwitchState(BotState.Guard);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.GetComponent<EnnemieBehavior>() && GetComponent<Collider>().isTrigger && player.GetComponent<PlayerStrikes>().isSlashing)
+        if (other.transform.GetComponent<EnnemieBehavior>() && GetComponent<Rigidbody>().isKinematic == false && GetComponent<Rigidbody>().velocity.x > 10f)
         {
             other.transform.GetComponent<Rigidbody>().isKinematic = false;
-            other.transform.GetComponent<EnnemieBehavior>().ApplyDammage(100);
-            other.GetComponent<Rigidbody>().AddForce(other.transform.right * grabHitForce);
-            if (vie - grabHitSelfDammage <= 0)
-            {
-                player.GetComponent<PlayerStrikes>().LostGrab();
-                Destroy(gameObject);
-            }
-            vie -= grabHitSelfDammage;
-            
-            
+            other.transform.GetComponent<EnnemieBehavior>().ApplyDammage(1000);
+            other.transform.GetComponent<Rigidbody>().AddForce(-other.transform.forward * grabHitForce);
         }
+    }
+
+    public void lifeSetters(int dammage)
+    {
+        vie -= dammage;
+    }
+
+    public int lifeGetters()
+    {
+        return vie;
     }
 }
