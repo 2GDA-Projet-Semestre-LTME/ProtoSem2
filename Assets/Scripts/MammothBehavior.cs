@@ -26,6 +26,8 @@ public class MammothBehavior : MonoBehaviour
     [SerializeField] private float knockDistance;
     [SerializeField] private float knockTime;
     [SerializeField] private float engagingDistance;
+    [SerializeField] private bool knockbacked;
+    [SerializeField] private Vector3 knockbackPosition;
 
     private NavMeshAgent agent;
 
@@ -54,11 +56,7 @@ public class MammothBehavior : MonoBehaviour
     void Update()
     {
         stunAmount = Mathf.Clamp(stunAmount, 0, 100);
-        if (stunAmount >= 40 && BotState != State.Knock && stunAmount < 100)
-        {
-            SwitchState(State.Knock);
-        }
-        else if (stunAmount >= 100 && BotState != State.Stun)
+        if (stunAmount >= 100 && BotState != State.Stun)
         {
             SwitchState(State.Stun);
         }
@@ -184,8 +182,11 @@ public class MammothBehavior : MonoBehaviour
                 //GetComponentInChildren<Animator>().Play("Punching");
                 break;
             case State.Knock:
-                //transform.position = Vector3.Lerp(transform.position,
-                    //transform.position + player.transform.forward * knockDistance, knockDistance * knockTime);
+                transform.position = Vector3.Lerp(transform.position, knockbackPosition, knockTime * Time.deltaTime);
+                if (Vector3.Distance(transform.position, knockbackPosition) < 1.6f)
+                {
+                    SwitchState(State.Chase);
+                }
                 break;
             
             
@@ -251,6 +252,9 @@ public class MammothBehavior : MonoBehaviour
 
     public void ApplyDammage(int dmg)
     {
+        if(stunAmount < 100)
+            SwitchState(State.Knock);
+        knockbackPosition = transform.position - (player.transform.position - transform.position) * knockDistance;
         FMODUnity.RuntimeManager.PlayOneShot("event:/NCP/Degat Ennemi/Crachat de sang + brisage d'os (ok)", transform.position);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Coup de poing/Coup de poing AVEC contact (ok)", transform.position);  
         if(isStuned)

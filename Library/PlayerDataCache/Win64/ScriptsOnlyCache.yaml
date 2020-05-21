@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - EagleBehavior
     - EnnemieBehavior
     - Ennemies_Positionnement
+    - GameManager
     - GetCollider
     - GrenadeBehavior
     - GrenadierBehavior
@@ -20,6 +21,7 @@ ScriptsOnlyBuild:
     - PlayerBehavior
     - PlayerStrikes
     Sirenix.OdinInspector.Editor.dll:
+    - Sirenix.OdinInspector.Editor.GeneralDrawerConfig
     - Sirenix.OdinInspector.Editor.ImportSettingsConfig
     - Sirenix.OdinInspector.Editor.InspectorConfig
     - Sirenix.Serialization.AOTGenerationConfig
@@ -29,8 +31,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -88,41 +92,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11360}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11400}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11678}
+      Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 11836}
+      Script: {instanceID: 11680}
     - Class: 114
-      Script: {instanceID: 12146}
+      Script: {instanceID: 11838}
     - Class: 114
-      Script: {instanceID: 12258}
+      Script: {instanceID: 12148}
     - Class: 114
-      Script: {instanceID: 12412}
+      Script: {instanceID: 12260}
     - Class: 114
-      Script: {instanceID: 12456}
+      Script: {instanceID: 12414}
     - Class: 114
-      Script: {instanceID: 12460}
+      Script: {instanceID: 12458}
     - Class: 114
-      Script: {instanceID: 12636}
+      Script: {instanceID: 12462}
     - Class: 114
-      Script: {instanceID: 12842}
+      Script: {instanceID: 12638}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12844}
     - Class: 114
-      Script: {instanceID: 13072}
+      Script: {instanceID: 12914}
     - Class: 114
-      Script: {instanceID: 13594}
+      Script: {instanceID: 13028}
     - Class: 114
-      Script: {instanceID: 14114}
+      Script: {instanceID: 13076}
     - Class: 114
-      Script: {instanceID: 14126}
+      Script: {instanceID: 13598}
     - Class: 114
-      Script: {instanceID: 14162}
+      Script: {instanceID: 14118}
     - Class: 114
-      Script: {instanceID: 495266}
+      Script: {instanceID: 14130}
+    - Class: 114
+      Script: {instanceID: 14166}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -130,6 +136,8 @@ ScriptsOnlyBuild:
     - Class: 136
       Script: {instanceID: 0}
     - Class: 137
+      Script: {instanceID: 0}
+    - Class: 144
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -170,6 +178,12 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
+      Hash: d3b0d9bb598c316303cf3b69f0f1d65e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -194,7 +208,7 @@ ScriptsOnlyBuild:
     className: GrenadeBehavior
   - hash:
       serializedVersion: 2
-      Hash: 192aa48eb1b11e004d34436b8f83fc70
+      Hash: 99876e794eb1cbb1351c0396107c7203
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnnemieBehavior
@@ -452,7 +466,7 @@ ScriptsOnlyBuild:
     className: FMODEventTrack
   - hash:
       serializedVersion: 2
-      Hash: 18e3519e8717181a5c737e85eda9fb04
+      Hash: d00633b9272b522420d369a9e6d90405
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MammothBehavior
@@ -564,6 +578,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CallbacksSounds
   - hash:
       serializedVersion: 2
       Hash: d6a8e9bec3160a152b9b2710593d3caa
@@ -926,7 +946,7 @@ ScriptsOnlyBuild:
     className: StandaloneInputModule
   - hash:
       serializedVersion: 2
-      Hash: d8286c3121f9295a78202368636be477
+      Hash: 3bd205682395b2f74c8fbdb0ecadf6a5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ennemies_Positionnement
@@ -978,13 +998,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CallbacksSounds
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity
-  playerPath: "C:/Users/Th\xE9o/Desktop/UltraViolence V2.2 Final Branch/UltraViolence.exe"
+  playerPath: "C:/Users/Th\xE9o/Desktop/Zeubi/UltraViolence.exe"

@@ -23,6 +23,7 @@ public class EnnemieBehavior : MonoBehaviour
     public Transform ringPosition;
     [SerializeField] private float engagingDistance;
     [SerializeField] private int lifePointSustenance;
+    public Vector3 destination;
 
     public enum BotState
     {
@@ -52,9 +53,27 @@ public class EnnemieBehavior : MonoBehaviour
                 if (ringPosition == null && player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0)
                 {
                     int I = UnityEngine.Random.Range(0, player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count);
-                    ringPosition = player.GetComponent<Ennemies_Positionnement>().avalaiblePosition[I];
-                    player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Remove(ringPosition);
-                    player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Add(ringPosition);
+                    bool positionTaken = false;
+                    EnnemieBehavior[] NMIList = GameObject.Find("GameManager").GetComponent<GameManager>().Jaguar;
+                    foreach (var nmi in NMIList)
+                    {
+                        if (nmi.ringPosition == player.GetComponent<Ennemies_Positionnement>().avalaiblePosition[I])
+                        {
+                            positionTaken = true;
+                        }
+                    }
+
+                    if (positionTaken == false)
+                    {
+                        ringPosition = player.GetComponent<Ennemies_Positionnement>().avalaiblePosition[I];
+                        player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Remove(ringPosition);
+                        player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Add(ringPosition);
+                    }
+                    else
+                    {
+                        SwitchState(BotState.Wait);
+                    }
+                    
                     
                 }
                 break;
@@ -67,31 +86,45 @@ public class EnnemieBehavior : MonoBehaviour
 
     private void UpdateState()
     {
-        switch (state)
+        if (vie > 0)
         {
+            switch (state)
+            {
             case BotState.Chase:
-                if (vie > 0)
-                {
-                    if(ringPosition && agent.enabled)
+                if(ringPosition && agent.enabled)
                         GetComponent<NavMeshAgent>().SetDestination(ringPosition.position);
-                    else if(Vector3.Distance(transform.position, player.transform.position) > waitingDistance)
-                    {
+                else if(Vector3.Distance(transform.position, player.transform.position) > waitingDistance)
+                {
                         agent.SetDestination(player.transform.position);
-                    }
-                    else
-                    {
+                }
+                else
+                {
                         agent.SetDestination(transform.position);
                         SwitchState(BotState.Wait);
-                    }
-                    GetComponentInChildren<Animator>().Play("Running");
                 }
+                if (ringPosition == null && player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count == 0 &&
+                        Vector3.Distance(transform.position, player.transform.position) < waitingDistance)
+                {
+                        SwitchState(BotState.Wait);
+                }
+                if(ringPosition && Vector3.Distance(this.transform.position, ringPosition.position) <= engagingDistance)
+                {
+                        print("Je garde");
+                        SwitchState(BotState.Guard);
+                }
+                GetComponentInChildren<Animator>().Play("Running");
+                
                 break;
             case BotState.Guard:
                     transform.LookAt(player.transform);
                     if(agent.enabled)
                         GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
                     GetComponentInChildren<Animator>().Play("Fighting Idle");
-                    if (player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0)
+                    if (player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0 && !ringPosition)
+                    {
+                        SwitchState(BotState.Chase);
+                    }
+                    if (ringPosition && Vector3.Distance(this.transform.position, ringPosition.position) > engagingDistance)
                     {
                         SwitchState(BotState.Chase);
                     }
@@ -104,10 +137,23 @@ public class EnnemieBehavior : MonoBehaviour
                 {
                     SwitchState(BotState.Chase);
                 }
-                GetComponentInChildren<Animator>().Play("Fighting Idle");
-                transform.LookAt(player.transform);
+                else if (Vector3.Distance(transform.position, player.transform.position) < waitingDistance - 0.5f)
+                {
+                    print("Je recule");
+                    agent.SetDestination(-transform.forward * waitingDistance);
+                    Debug.DrawRay(transform.position,-transform.forward * waitingDistance , Color.green);
+                    GetComponentInChildren<Animator>().Play("Running");
+                }
+                else
+                {
+                    GetComponentInChildren<Animator>().Play("Fighting Idle");
+                    transform.LookAt(player.transform);
+                }
+               
                 break;
         }
+        }
+        
     }
     
     public void SwitchState(BotState newState) {
@@ -117,24 +163,42 @@ public class EnnemieBehavior : MonoBehaviour
 
     void Update()
     {
+        destination = agent.destination;
+        if (ringPosition && Vector3.Dot(player.transform.forward, ringPosition.position - player.transform.position) < 0 && player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count > 0)
+        {
+            ringPosition = null;
+            int I = UnityEngine.Random.Range(0, player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count);
+            bool positionTaken = false;
+            EnnemieBehavior[] NMIList = GameObject.Find("GameManager").GetComponent<GameManager>().Jaguar;
+            foreach (var nmi in NMIList)
+            {
+                if (nmi.ringPosition == player.GetComponent<Ennemies_Positionnement>().avalaiblePosition[I])
+                {
+                    positionTaken = true;
+                }
+            }
+
+            if (positionTaken == false)
+            {
+                ringPosition = player.GetComponent<Ennemies_Positionnement>().avalaiblePosition[I];
+                player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Remove(ringPosition);
+                player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Add(ringPosition);
+            }
+            else
+            {
+                SwitchState(BotState.Wait);
+            }
+
+        }
         
-        if (ringPosition == null && player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Count == 0 &&
-            Vector3.Distance(transform.position, player.transform.position) < waitingDistance)
-        {
-            SwitchState(BotState.Wait);
-        }
-        else if (ringPosition && Vector3.Distance(this.transform.position, ringPosition.position) > engagingDistance)
-        {
-            SwitchState(BotState.Chase);
-        }
-        else if(ringPosition && state == BotState.Chase && Vector3.Distance(this.transform.position, ringPosition.position) <= engagingDistance)
-        {
-            SwitchState(BotState.Guard);
-        }
+        
+        
         if(!agent.pathPending)
             UpdateState();
             
         if (vie <= 0) {
+            GetComponentInChildren<Animator>().enabled = false;
+            GetComponent<Rigidbody>().isKinematic = false;
             Death();
         }
 
@@ -143,6 +207,7 @@ public class EnnemieBehavior : MonoBehaviour
             player.GetComponent<Ennemies_Positionnement>().avalaiblePosition.Add(ringPosition);
             player.GetComponent<Ennemies_Positionnement>().occupiedPosition.Remove(ringPosition);
             player.GetComponent<PlayerBehavior>().AddLifePoints(lifePointSustenance);
+            GameObject.Find("GameManager").GetComponent<GameManager>().GetAllJaguar();
             Destroy(gameObject);
         }
         

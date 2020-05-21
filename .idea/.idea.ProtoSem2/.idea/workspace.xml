@@ -15,7 +15,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MammothBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://F:/UnityProject/Toy Semestre 1/Toy Project/Assets/Scripts/FusionFPS/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EagleBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Ennemies_Positionnement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GrenadierBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CallbacksSounds.cs" root0="FORCE_HIGHLIGHTING" />
@@ -26,12 +28,14 @@
         <option value="$PROJECT_DIR$/../../../Scripts/grenadierBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/grenadierBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/CallbacksSounds.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MammothBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GrenadierBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerStrikes.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EagleBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Ennemies_Positionnement.cs" />
+        <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EnnemieBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MammothBehavior.cs" />
       </list>
     </option>
   </component>
@@ -93,6 +97,11 @@
       <workItem from="1589577268535" duration="3989000" />
       <workItem from="1589751951423" duration="5068000" />
       <workItem from="1589788549039" duration="11615000" />
+      <workItem from="1589885918248" duration="4013000" />
+      <workItem from="1589928635034" duration="1306000" />
+      <workItem from="1589932688067" duration="1677000" />
+      <workItem from="1589970183616" duration="5388000" />
+      <workItem from="1590015352019" duration="3700000" />
     </task>
     <servers />
   </component>

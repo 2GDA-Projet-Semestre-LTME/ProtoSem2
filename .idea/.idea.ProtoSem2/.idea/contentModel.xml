@@ -148,6 +148,7 @@
             </e>
           </e>
         </e>
+        <e p="GameManager.cs" t="Include" />
         <e p="MaterialsPS1" t="Include">
           <e p="psx-unlit.shader" t="Include" />
         </e>

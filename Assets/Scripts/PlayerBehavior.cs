@@ -82,7 +82,8 @@ public class PlayerBehavior : MonoBehaviour
         rotation.x = Mathf.Clamp(rotation.x, -66, 66);
         Target.rotation = Quaternion.Euler(rotation.x, rotation.y,0);
         transform.rotation = Quaternion.Euler(transform.rotation.x, rotation.y,transform.rotation.z);
-
+        if(Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+            GetComponent<Ennemies_Positionnement>().RefreshDotProduct();
 
     }
 

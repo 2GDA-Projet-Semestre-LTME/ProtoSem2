@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CallbacksSounds.cs" />
+     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Scripts\EagleBehavior.cs" />
      <Compile Include="Assets\Scripts\EnnemieBehavior.cs" />
      <Compile Include="Assets\Scripts\EnnemieSpawner.cs" />
