@@ -24,6 +24,7 @@ public class EnnemieBehavior : MonoBehaviour
     [SerializeField] private float engagingDistance;
     [SerializeField] private int lifePointSustenance;
     public Vector3 destination;
+    private Vector3 FallbackPosition;
 
     public enum BotState
     {
@@ -80,6 +81,7 @@ public class EnnemieBehavior : MonoBehaviour
             case BotState.Wait:
                 if(agent.enabled)
                     GetComponent<NavMeshAgent>().SetDestination(transform.position);
+                FallbackPosition = transform.position - transform.forward * waitingDistance;
                 break;
         }
     }
@@ -140,8 +142,8 @@ public class EnnemieBehavior : MonoBehaviour
                 else if (Vector3.Distance(transform.position, player.transform.position) < waitingDistance - 0.5f)
                 {
                     print("Je recule");
-                    agent.SetDestination(-transform.forward * waitingDistance);
-                    Debug.DrawRay(transform.position,-transform.forward * waitingDistance , Color.green);
+                    agent.SetDestination(FallbackPosition);
+                    Debug.DrawRay(transform.position,transform.forward * waitingDistance , Color.green);
                     GetComponentInChildren<Animator>().Play("Running");
                 }
                 else

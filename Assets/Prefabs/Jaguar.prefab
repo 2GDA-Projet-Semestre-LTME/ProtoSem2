@@ -4795,7 +4795,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000000018859282, y: 0.83047724, z: 0.00000017881393}
+  m_ConnectedAnchor: {x: -0.0000010586809, y: 0.8304747, z: -0.000004172325}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -4870,7 +4870,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000004172325, y: 0.7066112, z: 0.0000002682209}
+  m_ConnectedAnchor: {x: -0.0000060498714, y: 0.7066154, z: -0.00000035762787}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -5040,7 +5040,7 @@ MonoBehaviour:
   attackInterval: 3
   grabHitForce: 1000
   ringPosition: {fileID: 0}
-  engagingDistance: 2
+  engagingDistance: 1
   lifePointSustenance: 5
   destination: {x: 0, y: 0, z: 0}
   state: 0
@@ -5119,7 +5119,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.14725919, y: -0.114193, z: -0.022779759}
+  m_ConnectedAnchor: {x: -0.14725731, y: -0.114193745, z: -0.0227772}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5193,7 +5193,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 6.039045e-10, y: 0.20552906, z: -0.012071797}
+  m_ConnectedAnchor: {x: 0.00000035382254, y: 0.20552814, z: -0.0120756095}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5268,7 +5268,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000000069849193, y: 0.83048403, z: -0.00000020861626}
+  m_ConnectedAnchor: {x: 0.0000047192443, y: 0.83048844, z: 0.0000030994415}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -5342,7 +5342,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000006798409, y: 0.94936645, z: 0.002413448}
+  m_ConnectedAnchor: {x: 0.000005709883, y: 0.9493673, z: 0.0024058893}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5417,7 +5417,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.36368036, y: 0.69376695, z: -0.0072801784}
+  m_ConnectedAnchor: {x: 0.36368403, y: 0.6937678, z: -0.007282015}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5492,7 +5492,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.1472592, y: -0.114192985, z: -0.01950757}
+  m_ConnectedAnchor: {x: 0.14725617, y: -0.11419373, z: -0.019506956}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5567,7 +5567,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.36368048, y: 0.6938073, z: -0.007960424}
+  m_ConnectedAnchor: {x: -0.36367816, y: 0.6938073, z: -0.007954679}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5642,7 +5642,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000023841858, y: 0.706619, z: 0.00000020861626}
+  m_ConnectedAnchor: {x: 0.0000018775463, y: 0.7066181, z: 0.000002592802}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -5895,7 +5895,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: f22da43da90f0b540945c2451e0f2e1b,
         type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5420008163957686366, guid: f22da43da90f0b540945c2451e0f2e1b,
         type: 3}
